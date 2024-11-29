@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent, useMemo } from "react";
 import {
   BasicPokemonDataType,
   PokemonCardType,
@@ -14,6 +14,7 @@ const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [pokemonData, setPokemonData] = useState<PokemonCardType[]>([]);
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const fetchData = async () => {
     try {
@@ -39,15 +40,33 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
+  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const filteredPokemonData = useMemo(() => {
+    if (!searchValue) return pokemonData;
+    return pokemonData.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }, [pokemonData, searchValue]);
+
   return (
-    <div className="dashboard-container">
-      <div className="pokemon-container">
-        {pokemonData.length > 0 &&
-          pokemonData.map((pokemon, index) => (
+    <>
+      <div className="dashboard-container">
+        <input
+          className="searh-input"
+          onChange={handleSearchInputChange}
+          value={searchValue}
+          placeholder="Search Pokemon"
+        />
+        <div className="pokemon-container">
+          {filteredPokemonData.map((pokemon: PokemonCardType) => (
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

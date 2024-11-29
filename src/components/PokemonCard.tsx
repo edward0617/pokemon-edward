@@ -9,7 +9,6 @@ interface PokemonCardProps {
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   const [imageIndex, setImageIndex] = useState<number>(0);
-  console.log("###", imageIndex, Object.values(pokemon.sprites));
 
   return (
     <div className="card-container">
