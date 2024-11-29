@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Pagination.scss";
+
 interface PaginationPropsType {
   totalPage: number;
   currentPage: number;
@@ -28,7 +30,9 @@ const Pagination: React.FC<PaginationPropsType> = ({
           <button
             key={i}
             onClick={() => handlePageChange(i)}
-            className={currentPage === i ? "active" : ""}
+            className={`page-button ${currentPage === i ? "active" : ""}`}
+            aria-current={currentPage === i ? "page" : undefined}
+            aria-label={`Go to page ${i}`}
           >
             {i}
           </button>
@@ -47,10 +51,12 @@ const Pagination: React.FC<PaginationPropsType> = ({
     return pageNumbers;
   };
   return (
-    <div className="pagination-container">
+    <nav className="pagination-container" aria-label="Pagination Navigation">
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
+        className="nav-button"
+        aria-label="Go to previous page"
       >
         Prev
       </button>
@@ -58,10 +64,12 @@ const Pagination: React.FC<PaginationPropsType> = ({
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPage}
+        className="nav-button"
+        aria-label="Go to next page"
       >
         Next
       </button>
-    </div>
+    </nav>
   );
 };
 
