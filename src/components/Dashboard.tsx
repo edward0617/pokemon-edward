@@ -9,6 +9,7 @@ import PokemonCard from "./PokemonCard";
 
 import "./Dashboard.scss";
 import Pagination from "./Pagination";
+import Loader from "./Loader";
 
 const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 
@@ -62,14 +63,14 @@ const Dashboard: React.FC = () => {
     <>
       <div className="dashboard-container">
         <input
-          className="searh-input"
+          className="search-input"
           onChange={handleSearchInputChange}
           value={searchValue}
           placeholder="Search Pokemon"
         />
         <div className="pokemon-container">
           {loading ? (
-            <p>Loading...</p>
+            <Loader />
           ) : (
             filteredPokemonData.map((pokemon: PokemonCardType) => (
               <PokemonCard key={pokemon.name} pokemon={pokemon} />

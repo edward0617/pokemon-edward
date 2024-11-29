@@ -2,20 +2,29 @@ import React, { useState } from "react";
 import { PokemonCardType } from "../types";
 
 import "./PokemonCard.scss";
+import Loader from "./Loader";
 
 interface PokemonCardProps {
   pokemon: PokemonCardType;
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+  const [isLoad, setIsLoad] = useState(false);
   const firstType = pokemon.types[0].type.name;
+
+  const handleOnLoad = () => {
+    setIsLoad(true);
+  };
+
   return (
     <div className={`card-container ${firstType}`}>
       <div className={`card-image ${firstType}`}>
+        {!isLoad && <Loader />}
         <img
           src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id
             .toString()
             .padStart(3, "0")}.png`}
+          onLoad={handleOnLoad}
           alt={pokemon.name}
         />
       </div>
