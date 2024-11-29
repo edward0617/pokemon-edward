@@ -8,6 +8,7 @@ import {
 import PokemonCard from "./PokemonCard";
 
 import "./Dashboard.scss";
+import Pagination from "./Pagination";
 
 const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 
@@ -15,11 +16,16 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [pokemonData, setPokemonData] = useState<PokemonCardType[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get<PokemonResultType>(`${apiUrl}?limit=20`);
+      const response = await axios.get<PokemonResultType>(
+        `${apiUrl}?offset=${(currentPage - 1) * 20}&limit=20`
+      );
+      setTotalPage(Math.ceil(response.data.count / 20));
       const fetchApi = response.data.results;
       const result = await Promise.all(
         fetchApi.map(async (api: BasicPokemonDataType) => {
@@ -27,6 +33,7 @@ const Dashboard: React.FC = () => {
           return responseUrl.data;
         })
       );
+      console.log(result);
       setPokemonData(result);
     } catch (err) {
       console.error(err);
@@ -38,7 +45,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -65,6 +72,11 @@ const Dashboard: React.FC = () => {
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))}
         </div>
+        <Pagination
+          totalPage={totalPage}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </>
   );
