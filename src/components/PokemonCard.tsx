@@ -8,37 +8,30 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  const [imageIndex, setImageIndex] = useState<number>(0);
-
+  const firstType = pokemon.types[0].type.name;
   return (
-    <div className="card-container">
-      <div className="card-container__image-container">
-        <div
-          className={`card-container__image-container__prev-button${
-            imageIndex === 0 ? " disabled" : ""
-          }`}
-          onClick={() =>
-            setImageIndex(imageIndex > 0 ? imageIndex - 1 : imageIndex)
-          }
-        >
-          &lt;
-        </div>
+    <div className={`card-container ${firstType}`}>
+      <div className={`card-image ${firstType}`}>
         <img
-          src={Object.values(pokemon.sprites)[imageIndex * 2]}
-          alt={Object.keys(pokemon.sprites)[imageIndex * 2]}
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id
+            .toString()
+            .padStart(3, "0")}.png`}
+          alt={pokemon.name}
         />
-        <div
-          className={`card-container__image-container__next-button${
-            imageIndex === 3 ? " disabled" : ""
-          }`}
-          onClick={() =>
-            setImageIndex(imageIndex < 3 ? imageIndex + 1 : imageIndex)
-          }
-        >
-          &gt;
+      </div>
+      <div className="card-detail">
+        <div className="card-name">{pokemon.name.toUpperCase()}</div>
+        <div className="card-badge-container">
+          {pokemon.types.map((item) => (
+            <div
+              className={`card-badge ${item.type.name}`}
+              key={`${pokemon.name}-${item.type.name}`}
+            >
+              {item.type.name.toUpperCase()}
+            </div>
+          ))}
         </div>
       </div>
-      <div className="card-container__card-name">{pokemon.name}</div>
     </div>
   );
 };

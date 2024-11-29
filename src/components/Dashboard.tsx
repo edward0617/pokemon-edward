@@ -68,9 +68,13 @@ const Dashboard: React.FC = () => {
           placeholder="Search Pokemon"
         />
         <div className="pokemon-container">
-          {filteredPokemonData.map((pokemon: PokemonCardType) => (
-            <PokemonCard key={pokemon.name} pokemon={pokemon} />
-          ))}
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            filteredPokemonData.map((pokemon: PokemonCardType) => (
+              <PokemonCard key={pokemon.name} pokemon={pokemon} />
+            ))
+          )}
         </div>
         <Pagination
           totalPage={totalPage}

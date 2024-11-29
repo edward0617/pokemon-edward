@@ -3,6 +3,10 @@ export interface BasicPokemonDataType {
   url: string;
 }
 
+interface Type {
+  slot: number;
+  type: BasicPokemonDataType;
+}
 export interface PokemonResultType {
   count: number;
   next: string | null;
@@ -10,12 +14,14 @@ export interface PokemonResultType {
   results: BasicPokemonDataType[];
 }
 
-export interface Sprites {
+interface Sprites {
   front_default: string;
   back_default: string;
 }
 
 export interface PokemonCardType {
   name: string;
+  id: number;
   sprites: Sprites;
+  types: Type[];
 }
