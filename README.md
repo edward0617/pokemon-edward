@@ -18,7 +18,7 @@ This project is a Pokemon Dashboard web application, built to provide a detailed
   - Get Pokemon Details
     - Endpoint: /pokemon/{id or name}
     - Purpose: Fetch detailed information about a specific Pokemon, including stats, abilities, types, and more.
-    - Example Request: GET https://pokeapi.co/api/v2/pokemon/bulbasaur
+    - Example Request: GET https://pokeapi.co/api/v2/pokemon/1
   - Get Evolution Chain
     - Endpoint: /evolution-chain/{id}
     - Purpose: Retrieve the evolution chain for a specific Pokemon, showing its evolutions and conditions for evolving.
@@ -26,7 +26,7 @@ This project is a Pokemon Dashboard web application, built to provide a detailed
   - Get Pokemon Species
     - Endpoint: /pokemon-species/{id or name}
     - Purpose: Retrieve species-specific data such as flavor text, habitat, and gender differences.
-    - Example Request: GET https://pokeapi.co/api/v2/pokemon-species/bulbasaur
+    - Example Request: GET https://pokeapi.co/api/v2/pokemon-species/1
   - Get Type Information
     - Endpoint: /type/{id or name}
     - Purpose: Get information about a specific type, including Pokemon of that type and damage relations.
@@ -34,5 +34,15 @@ This project is a Pokemon Dashboard web application, built to provide a detailed
 
 ## Project Start
 1. clone the repository.
+```bash
+  git clone <repository_url>
+  cd <repository_folder>
+```
 2. install dependencies.
+```bash
+  npm install
+```
 3. Start the Server.
+```bash
+  npm start
+```
