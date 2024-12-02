@@ -8,29 +8,27 @@ import "./CardDetail.scss";
 import axios from "axios";
 
 const CardDetail: React.FC = () => {
-  const { name } = useParams<{ name: string }>();
+  const { id } = useParams<{ id: string }>();
   const [isLoading, setIsLoading] = useState(false);
   const [evolution, setEvolution] = useState<any[]>([]);
   const [pokemon, setPokemon] = useState<PokemonCardType | null>(null);
-  console.log(name);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get<PokemonCardType>(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
+          `https://pokeapi.co/api/v2/pokemon/${id}`
         );
         setPokemon(response.data);
 
         const speciesResponse = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon-species/${name}`
+          `https://pokeapi.co/api/v2/pokemon-species/${id}`
         );
         const evolutionResponse = await axios.get(
           speciesResponse.data["evolution_chain"]["url"]
         );
         const evolutionResult = evolutionResponse.data;
-        console.log(evolutionResult);
 
         const constrcutEvolutionData = (evolutionChain: any, name: any) => {
           name.push({
@@ -54,7 +52,7 @@ const CardDetail: React.FC = () => {
       }
     };
     fetchData();
-  }, [name]);
+  }, [id]);
 
   return (
     <div className="details-container">

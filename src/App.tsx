@@ -10,7 +10,7 @@ function App() {
       <div className="main__container">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/details/:name" element={<CardDetail />} />
+          <Route path="/details/:id" element={<CardDetail />} />
         </Routes>
       </div>
     </div>

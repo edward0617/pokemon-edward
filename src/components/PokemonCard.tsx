@@ -19,7 +19,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
 
   return (
     <div className={`card-container ${firstType}`}>
-      <Link to={`/details/${pokemon.name}`}>
+      <Link to={`/details/${pokemon.id}`}>
         <div className={`card-image ${firstType}`}>
           {!isLoad && <Loader />}
           <img
