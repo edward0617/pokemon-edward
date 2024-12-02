@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PokemonCardType } from "../../types";
 
 interface PokemonState {
-  pokemons: PokemonCardType[];
+  pokemonData: PokemonCardType[];
   filteredPokemonData: PokemonCardType[];
   currentPage: number;
   searchValue: string;
 }
 
 const initialState: PokemonState = {
-  pokemons: [],
+  pokemonData: [],
   filteredPokemonData: [],
   currentPage: 1,
   searchValue: "",
@@ -25,8 +25,8 @@ const pokemonSlice = createSlice({
     ) => {
       const newState = {
         ...state,
-        pokemons: [...state.pokemons, ...action.payload],
-        filteredPokemonData: [...state.filteredPokemonData, ...action.payload],
+        pokemonData: action.payload,
+        filteredPokemonData: action.payload,
       };
       return newState;
     },

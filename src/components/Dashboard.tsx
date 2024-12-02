@@ -23,6 +23,7 @@ const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 const Dashboard: React.FC = () => {
   const { pokemonData, filteredPokemonData, currentPage, searchValue } =
     useSelector((state: any) => state.pokemon);
+    console.log(pokemonData);
   const [loading, setLoading] = useState<boolean>(false);
   const [totalPage, setTotalPage] = useState<number>(0);
 
@@ -58,11 +59,21 @@ const Dashboard: React.FC = () => {
   }, [currentPage]);
 
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchValue(event.target.value));
-    const filteredPokemonData = pokemonData.filter((pokemon: PokemonCardType) =>
+    handleSearchValueChange(event.target.value);
+  };
+
+  const handleSearchValueChange = (searchValue: string) => {
+    console.log(pokemonData);
+    const newFilteredData = pokemonData.filter((pokemon: PokemonCardType) =>
       pokemon.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    dispatch(setFilteredPokemonData(filteredPokemonData));
+    console.log(newFilteredData);
+    dispatch(setSearchValue(searchValue));
+    dispatch(setFilteredPokemonData(newFilteredData));
+  };
+
+  const handlePageChange = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
 
   return (
@@ -85,7 +96,7 @@ const Dashboard: React.FC = () => {
       <Pagination
         totalPage={totalPage}
         currentPage={currentPage}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );
