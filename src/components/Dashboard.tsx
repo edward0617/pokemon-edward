@@ -21,6 +21,7 @@ const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fetchData = async () => {
+    console.log(currentPage);
     try {
       setLoading(true);
       const response = await axios.get<PokemonResultType>(
@@ -30,11 +31,12 @@ const Dashboard: React.FC = () => {
       const fetchApi = response.data.results;
       const result = await Promise.all(
         fetchApi.map(async (api: BasicPokemonDataType) => {
-          const responseUrl = await axios.get<PokemonCardType>(api.url);
+          const responseUrl = await axios.get<PokemonCardType>(
+            `${apiUrl}/${api.name}`
+          );
           return responseUrl.data;
         })
       );
-      console.log(result);
       setPokemonData(result);
     } catch (err) {
       console.error(err);
@@ -60,30 +62,28 @@ const Dashboard: React.FC = () => {
   }, [pokemonData, searchValue]);
 
   return (
-    <>
-      <div className="dashboard-container">
-        <input
-          className="search-input"
-          onChange={handleSearchInputChange}
-          value={searchValue}
-          placeholder="Search Pokemon"
-        />
-        <div className="pokemon-container">
-          {loading ? (
-            <Loader />
-          ) : (
-            filteredPokemonData.map((pokemon: PokemonCardType) => (
-              <PokemonCard key={pokemon.name} pokemon={pokemon} />
-            ))
-          )}
-        </div>
-        <Pagination
-          totalPage={totalPage}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-        />
+    <div className="dashboard-container">
+      <input
+        className="search-input"
+        onChange={handleSearchInputChange}
+        value={searchValue}
+        placeholder="Search Pokemon"
+      />
+      <div className="pokemon-container">
+        {loading ? (
+          <Loader />
+        ) : (
+          filteredPokemonData.map((pokemon: PokemonCardType) => (
+            <PokemonCard key={pokemon.name} pokemon={pokemon} />
+          ))
+        )}
       </div>
-    </>
+      <Pagination
+        totalPage={totalPage}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
+    </div>
   );
 };
 

@@ -1,0 +1,201 @@
+@import "../constant/color.scss";
+
+$types: normal, fire, water, electric, grass, ice, fighting, poison, ground, flying, psychic, bug, rock, ghost, dragon, dark, steel, fairy;
+
+.details-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .close-button {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    margin: 20px;
+    color: white;
+    border-radius: 50%;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  }
+
+  .details-info,
+  .details-sec-info {
+    color: white;
+    position: relative;
+    background-color: rgba(100, 100, 100, 0.3);
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  .details-info {
+    left: 0;
+    width: 500px;
+    height: 150px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 0;
+      width: 50px;
+      height: 5px;
+    }
+
+    .details-name,
+    .details-type {
+      font-size: 24px;
+      letter-spacing: 2px;
+      padding: 10px 0 20px;
+    }
+  }
+
+  .details-sec-info {
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    width: 300px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: 15px;
+      top: 0;
+      width: 50px;
+      height: 5px;
+    }
+
+    .details-info-text {
+      display: flex;
+      margin: 5px 0;
+
+      .details-info-label,
+      .details-info-content {
+        letter-spacing: 1.2px;
+        font-size: 14px;
+      }
+
+      .details-info-label {
+        flex: 1;
+        text-align: right;
+      }
+
+      .details-info-content {
+        flex: 2;
+        text-align: left;
+        padding: 0 5px;
+      }
+    }
+  }
+
+  .details-skill {
+    position: relative;
+    left: 0;
+    margin-top: 30px;
+
+    .details-skill-item {
+      display: flex;
+      align-items: center;
+      width: 500px;
+      color: white;
+      margin: 20px 0;
+      height: 30px;
+
+      .details-skill-item-text {
+        flex: 1;
+        text-align: right;
+        letter-spacing: 2px;
+      }
+
+      .details-skill-progress-bar-container {
+        flex: 1.2;
+        padding: 0 0 0 40px;
+        display: flex;
+        align-items: center;
+
+        .details-skill-progress-bar {
+          height: 6px;
+          position: relative;
+          border-radius: 1rem;
+          margin-right: 15px;
+
+          @each $type in $types {
+            &.type-#{$type} {
+              background-color: map-get($colors, $type);
+            }
+          }
+
+          &:before {
+            position: relative;
+            left: -30px;
+            top: -6px;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .details-image-container {
+    z-index: 2;
+    position: absolute;
+    left: 70%;
+    transform: translate(-50%, 0);
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -35%);
+      border: 6px solid currentColor;
+      outline: 4px solid currentColor;
+      outline-offset: 30px;
+      border-radius: 50%;
+      width: 500px;
+      height: 500px;
+      background: none;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 600px;
+      height: 50px;
+      border-top: 5px solid currentColor;
+      border-bottom: 5px solid currentColor;
+      transform: translate(-50%, 50px) rotate(-45deg) skew(-60deg);
+      background: none;
+    }
+
+    .details-image {
+      position: relative;
+      z-index: 100;
+    }
+  }
+
+}
+
+@each $type in $types {
+  .type-#{$type} {
+
+    .details-info,
+    .details-sec-info,
+    .details-skill-progress-bar,
+    .details-image-container {
+      color: map-get($colors, $type);
+      background-color: map-get($colors, $type);
+    }
+  }
+}

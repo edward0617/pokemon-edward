@@ -13,7 +13,6 @@ const Pagination: React.FC<PaginationPropsType> = ({
   currentPage,
   onPageChange,
 }) => {
-  console.log(totalPage);
   const handlePageChange = (pageNumber: number) => {
     onPageChange(pageNumber);
   };
