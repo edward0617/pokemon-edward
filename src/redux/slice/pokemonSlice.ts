@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PokemonCardType } from "../../types";
 
-type PokemonState = {
+interface PokemonState {
   pokemons: PokemonCardType[];
   filteredPokemonData: PokemonCardType[];
   currentPage: number;
   searchValue: string;
-};
+}
 
 const initialState: PokemonState = {
   pokemons: [],

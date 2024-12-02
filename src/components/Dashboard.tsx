@@ -24,10 +24,7 @@ const Dashboard: React.FC = () => {
   const { pokemonData, filteredPokemonData, currentPage, searchValue } =
     useSelector((state: any) => state.pokemon);
   const [loading, setLoading] = useState<boolean>(false);
-  // const [pokemonData, setPokemonData] = useState<PokemonCardType[]>([]);
-  // const [searchValue, setSearchValue] = useState<string>("");
   const [totalPage, setTotalPage] = useState<number>(0);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
 
   const dispatch = useDispatch();
 
