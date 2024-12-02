@@ -19,9 +19,22 @@ interface Sprites {
   back_default: string;
 }
 
+interface stat {
+  name: string;
+  url: string;
+}
+
+interface stats {
+  base_stat: number;
+  effort: number;
+  stat: stat;
+}
 export interface PokemonCardType {
   name: string;
   id: number;
   sprites: Sprites;
   types: Type[];
+  height: number;
+  weight: number;
+  stats: stats[];
 }
