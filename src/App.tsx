@@ -7,12 +7,10 @@ import CardDetail from "./components/CardDetail";
 function App() {
   return (
     <div className="App">
-      <div className="main__container">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/details/:id" element={<CardDetail />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/details/:id" element={<CardDetail />} />
+      </Routes>
     </div>
   );
 }
