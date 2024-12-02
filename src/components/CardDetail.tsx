@@ -46,6 +46,7 @@ const CardDetail: React.FC = () => {
 
         setEvolution(constrcutEvolutionData(evolutionResult["chain"], []));
       } catch (error) {
+        setIsLoading(false);
         console.error("Failed to fetch the data", error);
       } finally {
         setIsLoading(false);
