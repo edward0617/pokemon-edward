@@ -42,7 +42,12 @@ This project is a Pokemon Dashboard web application, built to provide a detailed
 ```bash
   npm install
 ```
-3. Start the Server.
+3. Start the Server
 ```bash
   npm start
 ```
+## Implementation
+1. Add the Search Autocomplete: Improve the search experience by suggesting Pokemon names as users type.
+2. Preload Images: Use lazy loading or preloading strategies to improve performance for image-heavy pages.
+3. Dark Mode: Implement a light/dark mode toggle to enhance usability and aesthetic appeal.
+4. Testing: Implement the test using Jest or React Testing Library.
