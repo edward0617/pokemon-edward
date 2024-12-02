@@ -3,7 +3,7 @@ import { PokemonCardType } from "../types";
 
 import "./PokemonCard.scss";
 import Loader from "./Loader";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface PokemonCardProps {
   pokemon: PokemonCardType;

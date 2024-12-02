@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PokemonCardType } from "../types";
 import EvolutionChain from "./EvolutionChain";
 import Loader from "./Loader";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 
 import "./CardDetail.scss";
 import axios from "axios";

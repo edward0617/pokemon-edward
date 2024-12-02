@@ -1,27 +1,37 @@
 import axios from "axios";
-import React, { useState, useEffect, ChangeEvent, useMemo } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import {
   BasicPokemonDataType,
   PokemonCardType,
   PokemonResultType,
 } from "../types";
 import PokemonCard from "./PokemonCard";
+import {
+  setPokemonData,
+  setFilteredPokemonData,
+  setCurrentPage,
+  setSearchValue,
+} from "../redux/slice/pokemonSlice";
 
 import "./Dashboard.scss";
 import Pagination from "./Pagination";
 import Loader from "./Loader";
+import { useDispatch, useSelector } from "react-redux";
 
 const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 
 const Dashboard: React.FC = () => {
+  const { pokemonData, filteredPokemonData, currentPage, searchValue } =
+    useSelector((state: any) => state.pokemon);
   const [loading, setLoading] = useState<boolean>(false);
-  const [pokemonData, setPokemonData] = useState<PokemonCardType[]>([]);
-  const [searchValue, setSearchValue] = useState<string>("");
+  // const [pokemonData, setPokemonData] = useState<PokemonCardType[]>([]);
+  // const [searchValue, setSearchValue] = useState<string>("");
   const [totalPage, setTotalPage] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const dispatch = useDispatch();
 
   const fetchData = async () => {
-    console.log(currentPage);
     try {
       setLoading(true);
       const response = await axios.get<PokemonResultType>(
@@ -37,7 +47,7 @@ const Dashboard: React.FC = () => {
           return responseUrl.data;
         })
       );
-      setPokemonData(result);
+      dispatch(setPokemonData(result));
     } catch (err) {
       console.error(err);
       setLoading(false);
@@ -51,15 +61,12 @@ const Dashboard: React.FC = () => {
   }, [currentPage]);
 
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-  };
-
-  const filteredPokemonData = useMemo(() => {
-    if (!searchValue) return pokemonData;
-    return pokemonData.filter((pokemon) =>
+    dispatch(setSearchValue(event.target.value));
+    const filteredPokemonData = pokemonData.filter((pokemon: PokemonCardType) =>
       pokemon.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-  }, [pokemonData, searchValue]);
+    dispatch(setFilteredPokemonData(filteredPokemonData));
+  };
 
   return (
     <div className="dashboard-container">
