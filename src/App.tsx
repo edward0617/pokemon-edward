@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import { Routes, Route } from "react-router";
-import CardDetail from "./components/CardDetail";
+import CardDetail from "./pages/CardDetail";
 
 function App() {
   return (

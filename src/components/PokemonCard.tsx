@@ -17,6 +17,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
     setIsLoad(true);
   };
 
+  console.log("Pokemon Card Data", pokemon);
+
   return (
     <div className={`card-container ${firstType}`}>
       <Link to={`/details/${pokemon.id}`}>

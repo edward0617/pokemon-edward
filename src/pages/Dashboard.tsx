@@ -5,7 +5,7 @@ import {
   PokemonCardType,
   PokemonResultType,
 } from "../types";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "../components/PokemonCard";
 import {
   setPokemonData,
   setFilteredPokemonData,
@@ -14,8 +14,8 @@ import {
 } from "../redux/slice/pokemonSlice";
 
 import "./Dashboard.scss";
-import Pagination from "./Pagination";
-import Loader from "./Loader";
+import Pagination from "../components/Pagination";
+import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 
 const apiUrl = "https://pokeapi.co/api/v2/pokemon";

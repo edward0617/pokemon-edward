@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PokemonCardType } from "../types";
-import EvolutionChain from "./EvolutionChain";
-import Loader from "./Loader";
+import EvolutionChain from "../components/EvolutionChain";
+import Loader from "../components/Loader";
 import { Link, useParams } from "react-router";
 
 import "./CardDetail.scss";
@@ -21,10 +21,12 @@ const CardDetail: React.FC = () => {
           `https://pokeapi.co/api/v2/pokemon/${id}`
         );
         setPokemon(response.data);
+        console.log("Card Detail Data", response.data);
 
         const speciesResponse = await axios.get(
           `https://pokeapi.co/api/v2/pokemon-species/${id}`
         );
+        console.log(speciesResponse);
         const evolutionResponse = await axios.get(
           speciesResponse.data["evolution_chain"]["url"]
         );
